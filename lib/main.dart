@@ -13,6 +13,7 @@ class RickAndMortyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
+      initialRoute: charactersScreen,
       onGenerateRoute: AppRouter.generateRoute,
     );
   }
