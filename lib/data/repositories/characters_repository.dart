@@ -2,15 +2,18 @@ import '../models/characters.dart';
 import '../web_services/characters_web_service.dart';
 
 class CharactersRepository {
-  Future<List<Character>?> getAllCharacters() async {
-    PageInfoAndCharacters pageInfoAndCharacters =
+  static Future<List<Character>?> getAllCharacters() async {
+    final characters =
         await CharactersWebServices.getAllCharactersAndPagesInfo();
-    return pageInfoAndCharacters.characters;
+    final data = PageInfoAndCharacters.fromJson(characters);
+    return data.characters;
   }
 
   Future<Info?> getPageInfo() async {
-    PageInfoAndCharacters pageInfoAndCharacters =
+    final characters =
         await CharactersWebServices.getAllCharactersAndPagesInfo();
-    return pageInfoAndCharacters.pagesInfo;
+
+    final data = PageInfoAndCharacters.fromJson(characters);
+    return data.pagesInfo;
   }
 }
