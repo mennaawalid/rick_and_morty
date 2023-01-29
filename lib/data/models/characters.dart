@@ -34,10 +34,10 @@ class Character {
   String? species;
   String? type;
   String? gender;
-  Map<String, String>? originNameAndURL;
-  Map<String, String>? locationNameAndURL;
+  Map<String, dynamic>? originNameAndURL;
+  Map<String, dynamic>? locationNameAndURL;
   String? imageURL;
-  List<String>? episodeURL;
+  List<dynamic>? episodeURL;
   String? characterUrl;
   String? creationDate;
 
