@@ -7,7 +7,7 @@ import '../../constants/strings.dart';
 import '../models/characters.dart';
 
 class CharactersWebServices {
-  static Future<PageInfoAndCharacters> getAllCharactersAndPagesInfo() async {
+  static Future<Map<String, dynamic>> getAllCharactersAndPagesInfo() async {
     BaseOptions options = BaseOptions(
       baseUrl: baseURL,
       receiveDataWhenStatusError: true,
@@ -18,17 +18,15 @@ class CharactersWebServices {
 
     try {
       Response response = await dio.get('character');
-      var jsondata = json.decode(response.data);
-      PageInfoAndCharacters charactersAndPagesInfo =
-          PageInfoAndCharacters.fromJson(jsondata);
-      return charactersAndPagesInfo;
+      // print(response.data.toString());
+      return response.data;
     } catch (e) {
       if (kDebugMode) {
         print(
           e.toString(),
         );
       }
-      return PageInfoAndCharacters.fromJson({});
+      return {};
     }
   }
 }
