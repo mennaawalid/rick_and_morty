@@ -1,15 +1,10 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
-import '../../constants/strings.dart';
-import '../models/characters.dart';
-
 class CharactersWebServices {
-  static Future<Map<String, dynamic>> getAllCharactersAndPagesInfo() async {
+  static Future<Map<String, dynamic>> getAllCharactersAndPagesInfo(
+      String url) async {
     BaseOptions options = BaseOptions(
-      baseUrl: baseURL,
       receiveDataWhenStatusError: true,
       connectTimeout: 20 * 1000,
       receiveTimeout: 20 * 1000, //20 seconds
@@ -17,7 +12,7 @@ class CharactersWebServices {
     Dio dio = Dio(options);
 
     try {
-      Response response = await dio.get('character');
+      Response response = await dio.get(url);
       // print(response.data.toString());
       return response.data;
     } catch (e) {
