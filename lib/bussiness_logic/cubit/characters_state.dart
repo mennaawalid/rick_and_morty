@@ -6,10 +6,16 @@ abstract class CharactersState {}
 
 class CharactersInitial extends CharactersState {}
 
+class CharactersLoading extends CharactersState {}
+
+class CharactersNotLoaded extends CharactersState {}
+
 class CharactersLoaded extends CharactersState {
   final List<Character> characters;
+  final Info pageInfo;
 
-  CharactersLoaded(
-    this.characters,
-  );
+  CharactersLoaded({
+    required this.characters,
+    required this.pageInfo,
+  });
 }
