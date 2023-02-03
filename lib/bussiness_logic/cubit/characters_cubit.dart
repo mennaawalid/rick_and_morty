@@ -9,15 +9,34 @@ part 'characters_state.dart';
 
 class CharactersCubit extends Cubit<CharactersState> {
   final CharactersRepository charactersRepository;
-  late final List<Character> characters;
+  // late final List<Character> characters;
   CharactersCubit(this.charactersRepository) : super(CharactersInitial());
 
-  List<Character> getAllCharacters() {
-    charactersRepository.getAllCharacters().then((characters) {
-      emit(CharactersLoaded(characters));
-      this.characters = characters;
-    });
+  void changePage(String url) {
+    emit(
+      CharactersLoading(),
+    );
+    charactersRepository.getPageInfo(url).then(
+          (info) =>
+              charactersRepository.getAllCharacters(url).then((characters) {
+            emit(CharactersLoaded(pageInfo: info, characters: characters));
+            // this.characters = characters;
+          }),
+        );
+  }
 
-    return characters;
+  void getAllCharacters() {
+    charactersRepository
+        .getPageInfo('https://rickandmortyapi.com/api/character')
+        .then(
+          (info) => charactersRepository
+              .getAllCharacters('https://rickandmortyapi.com/api/character')
+              .then((characters) {
+            emit(CharactersLoaded(pageInfo: info, characters: characters));
+            // this.characters = characters;
+          }),
+        );
+
+    // return characters;
   }
 }
