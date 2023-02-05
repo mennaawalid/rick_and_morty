@@ -1,28 +1,53 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 import 'package:rick_and_morty/data/repositories/characters_repository.dart';
 
 import '../../data/models/characters.dart';
+import 'internet_cubit.dart';
+// import 'internet_cubit.dart';
 
 part 'characters_state.dart';
 
 class CharactersCubit extends Cubit<CharactersState> {
   final CharactersRepository charactersRepository;
-  // late final List<Character> characters;
-  CharactersCubit(this.charactersRepository) : super(CharactersInitial());
+  final InternetCubit internetCubit;
+  late StreamSubscription internetStreamSubscription;
+  late InternetState internetState;
+  CharactersCubit(this.charactersRepository, this.internetCubit)
+      : super(CharactersInitial()) {
+    // internetStreamSubscription =
+    //     internetCubit.stream.listen((connectivityStateResult) {
+    //   if (connectivityStateResult is InternetConnected) {
+    //     emit(state);
+    //   } else if (connectivityStateResult is InternetDisconnected) {
+    //     emit(
+    //       CharactersNotLoaded(),
+    //     );
+    //   } else {
+    //     emit(
+    //       CharactersLoading(),
+    //     );
+    //   }
+    // });
+  }
 
   void changePage(String url) {
     emit(
       CharactersLoading(),
     );
-    charactersRepository.getPageInfo(url).then(
-          (info) =>
-              charactersRepository.getAllCharacters(url).then((characters) {
-            emit(CharactersLoaded(pageInfo: info, characters: characters));
-            // this.characters = characters;
-          }),
+    charactersRepository.getPageInfo(url).then((info) {
+      charactersRepository.getAllCharacters(url).then((characters) {
+        emit(
+          CharactersLoaded(
+            pageInfo: info,
+            characters: characters,
+          ),
         );
+      });
+    });
   }
 
   void getAllCharacters() {
@@ -32,11 +57,19 @@ class CharactersCubit extends Cubit<CharactersState> {
           (info) => charactersRepository
               .getAllCharacters('https://rickandmortyapi.com/api/character')
               .then((characters) {
-            emit(CharactersLoaded(pageInfo: info, characters: characters));
-            // this.characters = characters;
+            emit(
+              CharactersLoaded(
+                pageInfo: info,
+                characters: characters,
+              ),
+            );
           }),
         );
+  }
 
-    // return characters;
+  @override
+  Future<void> close() {
+    internetStreamSubscription.cancel();
+    return super.close();
   }
 }
