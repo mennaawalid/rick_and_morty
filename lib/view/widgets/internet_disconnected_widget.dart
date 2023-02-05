@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class InternetDisconnected extends StatelessWidget {
-  const InternetDisconnected({super.key});
+class InternetDisconnectedWidet extends StatelessWidget {
+  const InternetDisconnectedWidet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +21,6 @@ class InternetDisconnected extends StatelessWidget {
         ],
       ),
     );
-    ;
+    
   }
 }
