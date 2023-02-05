@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
 
 import 'constants/strings.dart';
+import 'data/models/characters.dart';
 import 'view/screens/character_details.dart';
 import 'view/screens/characters_screen.dart';
 
 class AppRouter {
-  static Route? generateRoute(RouteSettings settings) {
+  AppRouter();
+
+  Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case charactersScreen:
         return MaterialPageRoute(
           builder: (_) {
-            return CharactersScreen();
+            return const CharactersScreen();
           },
         );
+
       case charactersDetailsScreen:
+        final Character selectedCharacter = settings.arguments as Character;
         return MaterialPageRoute(
           builder: (_) {
-            return CharactersDetails();
+            return CharactersDetails(
+              selectedCharacter: selectedCharacter,
+            );
           },
         );
       default:
