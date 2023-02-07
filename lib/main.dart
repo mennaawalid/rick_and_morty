@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rick_and_morty/constants/my_colors.dart';
 
 import '/app_router.dart';
@@ -40,26 +41,33 @@ class RickAndMortyApp extends StatelessWidget {
           ),
         ),
       ],
-      child: MaterialApp(
-        theme: ThemeData.dark().copyWith(
-          primaryColor: MyColors.grey,
-          appBarTheme: const AppBarTheme(
-            iconTheme: IconThemeData(color: MyColors.grey),
-            backgroundColor: MyColors.greenish,
-            titleTextStyle: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 22,
-              color: MyColors.grey,
+      child: ScreenUtilInit(
+        designSize: const Size(360, 690),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (BuildContext context, Widget? child) {
+          return MaterialApp(
+            theme: ThemeData.dark().copyWith(
+              primaryColor: MyColors.grey,
+              appBarTheme: AppBarTheme(
+                iconTheme: const IconThemeData(color: MyColors.grey),
+                backgroundColor: MyColors.greenish,
+                titleTextStyle: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22.sp,
+                  color: MyColors.grey,
+                ),
+              ),
+              colorScheme: ColorScheme.fromSwatch().copyWith(
+                onPrimary: Colors.white,
+                primary: MyColors.grey,
+              ),
             ),
-          ),
-          colorScheme: ColorScheme.fromSwatch().copyWith(
-            onPrimary: Colors.white,
-            primary: MyColors.grey,
-          ),
-        ),
-        debugShowCheckedModeBanner: false,
-        initialRoute: charactersScreen,
-        onGenerateRoute: appRouter.generateRoute,
+            debugShowCheckedModeBanner: false,
+            initialRoute: charactersScreen,
+            onGenerateRoute: appRouter.generateRoute,
+          );
+        },
       ),
     );
   }

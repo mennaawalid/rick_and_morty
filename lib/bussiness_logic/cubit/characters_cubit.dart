@@ -14,14 +14,13 @@ part 'characters_state.dart';
 class CharactersCubit extends Cubit<CharactersState> {
   final CharactersRepository charactersRepository;
   final InternetCubit internetCubit;
-  late StreamSubscription internetStreamSubscription;
-  late InternetState internetState;
+//  late StreamSubscription internetStreamSubscription;
   CharactersCubit(this.charactersRepository, this.internetCubit)
       : super(CharactersInitial()) {
     // internetStreamSubscription =
     //     internetCubit.stream.listen((connectivityStateResult) {
     //   if (connectivityStateResult is InternetConnected) {
-    //     emit(state);
+    //     getAllCharacters();
     //   } else if (connectivityStateResult is InternetDisconnected) {
     //     emit(
     //       CharactersNotLoaded(),
@@ -67,9 +66,9 @@ class CharactersCubit extends Cubit<CharactersState> {
         );
   }
 
-  @override
-  Future<void> close() {
-    internetStreamSubscription.cancel();
-    return super.close();
-  }
+  // @override
+  // Future<void> close() {
+  //   internetStreamSubscription.cancel();
+  //   return super.close();
+  // }
 }

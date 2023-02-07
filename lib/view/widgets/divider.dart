@@ -9,9 +9,9 @@ class BuildDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Divider(
       endIndent: endIndent,
-      height: 50,
+      height: MediaQuery.of(context).size.height * 0.05,
       color: MyColors.greenish,
-      thickness: 3,
+      thickness: MediaQuery.of(context).size.height * 0.006,
     );
   }
 }

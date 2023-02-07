@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../constants/my_colors.dart';
 
 import '../../constants/strings.dart';
@@ -39,9 +40,8 @@ class CharacterItem extends StatelessWidget {
               child: Text(
                 characterDetails.name!,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  height: 1.8,
-                  fontSize: 18,
+                style: TextStyle(
+                  fontSize: 18.sp,
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
                 ),

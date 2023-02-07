@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:flutter_offline/flutter_offline.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rick_and_morty/bussiness_logic/cubit/characters_cubit.dart';
 import 'package:rick_and_morty/bussiness_logic/cubit/internet_cubit.dart';
 
@@ -38,11 +39,11 @@ class _CharactersScreenState extends State<CharactersScreen> {
         color: MyColors.grey,
       ),
       controller: _searchTextFieldController,
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         hintText: 'Search for a character...',
         hintStyle: TextStyle(
           color: MyColors.grey,
-          fontSize: 18,
+          fontSize: 18.sp,
         ),
       ),
       onChanged: (searchedCharacter) {
